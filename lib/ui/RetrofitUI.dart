@@ -13,31 +13,28 @@ class RetrofitUI extends StatelessWidget {
       appBar: AppBar(
         title: Text('Retrofit'),
         actions: [
-          IconButton(
-              onPressed: () => retrofitController.getData(),
-              icon: Icon(Icons.refresh))
+          // IconButton(
+          //     onPressed: () => retrofitController.getData(),
+          //     icon: Icon(Icons.refresh))
         ],
       ),
       body: Obx(
-        () => retrofitController.charObs.value.name.isEmpty
+        () => retrofitController.characters.value.results == null
             ? Center(child: CupertinoActivityIndicator())
-            : Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: Card(
-                  child: ListTile(
-                    leading:
-                        Image.network(retrofitController.charObs.value.image),
-                    title: Text('${retrofitController.charObs.value.name}'),
-                    subtitle:
-                        Text('${retrofitController.charObs.value.status}'),
-                    trailing:
-                        retrofitController.charObs.value.gender.toLowerCase() ==
-                                'male'
-                            ? Icon(Icons.male)
-                            : Icon(Icons.female),
-                  ),
-                ),
+            : ListView.builder(
+                itemCount: 4,
+                itemBuilder: (BuildContext context, int index) {
+                  var listItem =
+                      retrofitController.characters.value.results![index];
+                  return ListTile(
+                    leading: Image.network(listItem.image),
+                    title: Text('${listItem.name}'),
+                    subtitle: Text('${listItem.species}'),
+                    trailing: listItem.gender.toLowerCase() == 'male'
+                        ? Icon(Icons.male)
+                        : Icon(Icons.female),
+                  );
+                },
               ),
       ),
     );

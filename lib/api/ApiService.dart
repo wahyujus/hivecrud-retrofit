@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:hivecrud/api/response/CharResponse.dart';
+import 'package:hivecrud/api/response/CharacterListResponse.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'ApiService.g.dart';
@@ -19,6 +20,9 @@ abstract class ApiService {
     return _ApiService(dio, baseUrl: baseUrl);
   }
 
-  @GET('character/2')
-  Future<CharResponse> character();
+  @GET('character/{id}')
+  Future<CharResponse> character(@Path() String id);
+
+  @GET('character')
+  Future<CharacterListResponse> charactersList();
 }

@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
             homeController.indexTab.value = val;
 
             if (val == 1) {
-              await retrofitController.getData();
+              // await retrofitController.getData();
             }
           },
         ),
