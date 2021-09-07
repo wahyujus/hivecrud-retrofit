@@ -22,7 +22,7 @@ class RetrofitUI extends StatelessWidget {
         () => retrofitController.characters.value.results == null
             ? Center(child: CupertinoActivityIndicator())
             : ListView.builder(
-                itemCount: 4,
+                itemCount: retrofitController.characters.value.results!.length,
                 itemBuilder: (BuildContext context, int index) {
                   var listItem =
                       retrofitController.characters.value.results![index];
