@@ -4,7 +4,7 @@ import 'package:hivecrud/api/ApiService.dart';
 import 'package:hivecrud/api/entity/OriginEntity.dart';
 import 'package:hivecrud/api/response/CharResponse.dart';
 
-class RestrofitController extends GetxController {
+class RetrofitController extends GetxController {
 //observed object
   var charObs = CharResponse(
     id: 0,

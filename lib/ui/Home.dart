@@ -11,7 +11,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeController = Get.put(HomeController());
-    final restrofitController = Get.put(RestrofitController());
+    final retrofitController = Get.put(RetrofitController());
 
     return Obx(
       () => Scaffold(
@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
             homeController.indexTab.value = val;
 
             if (val == 1) {
-              await restrofitController.getData();
+              await retrofitController.getData();
             }
           },
         ),

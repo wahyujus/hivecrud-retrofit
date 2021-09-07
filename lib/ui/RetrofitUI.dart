@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hivecrud/controller/RetrofitController.dart';
@@ -7,32 +8,37 @@ class RetrofitUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final restrofitController = Get.put(RestrofitController());
+    final retrofitController = Get.put(RetrofitController());
     return Scaffold(
       appBar: AppBar(
         title: Text('Retrofit'),
         actions: [
           IconButton(
-              onPressed: () => restrofitController.getData(),
+              onPressed: () => retrofitController.getData(),
               icon: Icon(Icons.refresh))
         ],
       ),
       body: Obx(
-        () => Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Card(
-            child: ListTile(
-              leading: Image.network(restrofitController.charObs.value.image),
-              title: Text('${restrofitController.charObs.value.name}'),
-              subtitle: Text('${restrofitController.charObs.value.status}'),
-              trailing:
-                  restrofitController.charObs.value.gender.toLowerCase() ==
-                          'male'
-                      ? Icon(Icons.male)
-                      : Icon(Icons.female),
-            ),
-          ),
-        ),
+        () => retrofitController.charObs.value.name.isEmpty
+            ? Center(child: CupertinoActivityIndicator())
+            : Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                child: Card(
+                  child: ListTile(
+                    leading:
+                        Image.network(retrofitController.charObs.value.image),
+                    title: Text('${retrofitController.charObs.value.name}'),
+                    subtitle:
+                        Text('${retrofitController.charObs.value.status}'),
+                    trailing:
+                        retrofitController.charObs.value.gender.toLowerCase() ==
+                                'male'
+                            ? Icon(Icons.male)
+                            : Icon(Icons.female),
+                  ),
+                ),
+              ),
       ),
     );
   }
